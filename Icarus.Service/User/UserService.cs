@@ -1,4 +1,5 @@
-﻿using Icarus.DB.Entities.DataContext;
+﻿using AutoMapper;
+using Icarus.DB.Entities.DataContext;
 using Icarus.Model;
 using Icarus.Model.User;
 using System;
@@ -11,6 +12,11 @@ namespace Icarus.Service.User
 {
     public class UserService : IUserService
     {
+        private readonly IMapper mapper;
+        public UserService(IMapper _mapper)
+        {
+            mapper = _mapper;
+        }
         public General<UserViewModel> Login(UserViewModel user)
         {
             throw new NotImplementedException();
