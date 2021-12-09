@@ -11,5 +11,6 @@ namespace Icarus.Model
         public bool IsSuccess { get; set; }
         public T Entity { get; set; }
         public List<T> List { get; set; }
+        public string ExceptionMessage { get; set; }
     }
 }
