@@ -13,10 +13,7 @@ namespace Icarus.Service.User
     {
         public General<UserViewModel> Login(UserViewModel user)
         {
-            using(var context = new IcarusContext())
-            {
-
-            }
+            throw new NotImplementedException();
         }
         public General<UserViewModel> GetUsers()
         {
