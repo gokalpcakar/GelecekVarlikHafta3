@@ -9,6 +9,7 @@ namespace Icarus.DB.Entities.DataContext
 {
     public partial class IcarusContext : DbContext
     {
+        //Scaffold-DbContext "Server=.;Database=Icarus;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -Contextdir Entities/DataContext -Context IcarusContext -Project Icarus.DB -StartUpProject Icarus.DB -NoPluralize -Force
         public IcarusContext()
         {
         }
@@ -26,7 +27,7 @@ namespace Icarus.DB.Entities.DataContext
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+
                 optionsBuilder.UseSqlServer("Server=.;Database=Icarus;Trusted_Connection=True;");
             }
         }
