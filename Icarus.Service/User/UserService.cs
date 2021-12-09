@@ -42,8 +42,16 @@ namespace Icarus.Service.User
                 var data = context.User
                     .Where(x => x.IsActive && !x.IsDeleted)
                     .OrderBy(x => x.Id);
-                result.List = mapper.Map<List<UserViewModel>>(data);
-                result.IsSuccess = true;
+
+                if (data.Any())
+                {
+                    result.List = mapper.Map<List<UserViewModel>>(data);
+                    result.IsSuccess = true;
+                }
+                else
+                {
+                    result.ExceptionMessage = "Hiçbir kullanıcı bulunamadı.";
+                }
             }
 
             return result;
@@ -73,16 +81,23 @@ namespace Icarus.Service.User
             {
                 var updateUser = context.User.SingleOrDefault(i => i.Id == user.Id);
 
-                updateUser.Name = user.Name;
-                updateUser.Surname = user.Surname;
-                updateUser.UserName = user.UserName;
-                updateUser.Email = user.Email;
-                updateUser.Password = user.Password;
+                if (updateUser is not null)
+                {
+                    updateUser.Name = user.Name;
+                    updateUser.Surname = user.Surname;
+                    updateUser.UserName = user.UserName;
+                    updateUser.Email = user.Email;
+                    updateUser.Password = user.Password;
 
-                context.SaveChanges();
+                    context.SaveChanges();
 
-                result.Entity = mapper.Map<UserViewModel>(updateUser);
-                result.IsSuccess = true;
+                    result.Entity = mapper.Map<UserViewModel>(updateUser);
+                    result.IsSuccess = true;
+                }
+                else
+                {
+                    result.ExceptionMessage = "Kullanıcı bulunamadı.";
+                }
             }
 
             return result;
@@ -94,11 +109,19 @@ namespace Icarus.Service.User
             using (var context = new IcarusContext())
             {
                 var user = context.User.SingleOrDefault(i => i.Id == id);
-                context.User.Remove(user);
-                context.SaveChanges();
 
-                result.Entity = mapper.Map<UserViewModel>(user);
-                result.IsSuccess = true;
+                if (user is not null)
+                {
+                    context.User.Remove(user);
+                    context.SaveChanges();
+
+                    result.Entity = mapper.Map<UserViewModel>(user);
+                    result.IsSuccess = true;
+                }
+                else
+                {
+                    result.ExceptionMessage = "Kullanıcı bulunamadı.";
+                }
             }
 
             return result;
