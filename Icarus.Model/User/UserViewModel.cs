@@ -12,11 +12,11 @@ namespace Icarus.Model.User
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Ad alanı zorunludur.")]
-        [StringLength(50, MinimumLength = 6, ErrorMessage = "Soyadı 6 iler 50 karakter arasında olmalıdır.")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Ad 3 iler 50 karakter arasında olmalıdır.")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Soyadı boş bırakılamaz!")]
-        [StringLength(50, MinimumLength = 6, ErrorMessage = "Soyadı 6 iler 50 karakter arasında olmalıdır.")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Soyadı 2 iler 50 karakter arasında olmalıdır.")]
         public string Surname { get; set; }
 
         [Required(ErrorMessage = "Kullanıcı adı boş bırakılamaz.")]
@@ -29,7 +29,7 @@ namespace Icarus.Model.User
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Şifre alanı boş bırakılamaz!")]
-        [StringLength(50, MinimumLength = 6, ErrorMessage = "Şifre 6 ile 50 karakter arasında olmalıdır.")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Şifre 3 ile 50 karakter arasında olmalıdır.")]
         public string Password { get; set; }
     }
 }
