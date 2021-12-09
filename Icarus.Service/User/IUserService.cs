@@ -10,7 +10,7 @@ namespace Icarus.Service.User
 {
     public interface IUserService
     {
-        public General<UserViewModel> Login(UserViewModel user);
+        public General<LoginViewModel> Login(LoginViewModel user);
         public General<UserViewModel> GetUsers();
         public General<UserViewModel> Insert(UserViewModel newUser);
         public General<UserViewModel> Update(UserViewModel user);

@@ -17,18 +17,19 @@ namespace Icarus.Service.User
         {
             mapper = _mapper;
         }
-        public General<UserViewModel> Login(UserViewModel user)
+        public General<LoginViewModel> Login(LoginViewModel user)
         {
-            var result = new General<UserViewModel>();
+            var result = new General<LoginViewModel>();
             var model = mapper.Map<Icarus.DB.Entities.User>(user);
 
             using (var context = new IcarusContext())
             {
-                result.Entity = mapper.Map<UserViewModel>(model);
+                result.Entity = mapper.Map<LoginViewModel>(model);
                 result.IsSuccess = context.User.Any(
-                    x => x.Id == user.Id && x.IsActive && !x.IsDeleted &&
-                    x.Name == user.Name && x.Surname == user.Surname &&
-                    x.UserName == user.UserName && x.Password == user.Password);
+                    x => x.UserName == user.UserName &&
+                                       x.IsActive &&
+                                       !x.IsDeleted &&
+                                       x.Password == user.Password);
             }
 
             return result;

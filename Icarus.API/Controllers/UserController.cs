@@ -24,7 +24,7 @@ namespace Icarus.API.Controllers
         }
 
         [HttpPost("login")]
-        public General<UserViewModel> Login([FromBody] UserViewModel user)
+        public General<LoginViewModel> Login([FromBody] LoginViewModel user)
         {
             return userService.Login(user);
         }
