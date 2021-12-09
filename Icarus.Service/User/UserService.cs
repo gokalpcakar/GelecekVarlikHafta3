@@ -74,13 +74,13 @@ namespace Icarus.Service.User
 
             return result;
         }
-        public General<UserViewModel> Update(UserViewModel user)
+        public General<UserViewModel> Update(int id, UserViewModel user)
         {
             var result = new General<UserViewModel>();
 
             using (var context = new IcarusContext())
             {
-                var updateUser = context.User.SingleOrDefault(i => i.Id == user.Id);
+                var updateUser = context.User.SingleOrDefault(i => i.Id == id);
 
                 if (updateUser is not null)
                 {

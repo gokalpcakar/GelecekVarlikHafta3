@@ -36,9 +36,9 @@ namespace Icarus.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public General<UserViewModel> Update([FromBody] UserViewModel user)
+        public General<UserViewModel> Update(int id, [FromBody] UserViewModel user)
         {
-            return userService.Update(user);
+            return userService.Update(id, user);
         }
 
         [HttpDelete("{id}")]
