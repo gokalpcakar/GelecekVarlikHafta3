@@ -1,5 +1,6 @@
 using AutoMapper;
 using Icarus.API.Infrastructure;
+using Icarus.Service.Product;
 using Icarus.Service.User;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,7 @@ namespace Icarus.API
             services.AddSingleton(mapper);
 
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IProductService, ProductService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -9,6 +9,9 @@ namespace Icarus.Model.Product
 {
     public class ProductViewModel
     {
+        public int CategoryId { get; set; }
+        public int Iuser { get; set; }
+
         [Required(ErrorMessage = "Ürün adı boş bırakılamaz.")]
         [StringLength(50, ErrorMessage = "Ürün adı 50 karakterden fazla olmamalıdır.")]
         public string Name { get; set; }

@@ -27,5 +27,17 @@ namespace Icarus.API.Controllers
         {
             return productService.Insert(newProduct);
         }
+
+        [HttpPut("{id}")]
+        public General<ProductViewModel> Update(int id, [FromBody] ProductViewModel product)
+        {
+            return productService.Update(id, product);
+        }
+
+        [HttpDelete("{id}")]
+        public General<ProductViewModel> Delete(int id)
+        {
+            return productService.Delete(id);
+        }
     }
 }
