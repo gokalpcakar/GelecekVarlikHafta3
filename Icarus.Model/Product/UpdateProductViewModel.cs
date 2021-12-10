@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Icarus.Model.Product
 {
+    // Ürünlerin güncellemesinde kullanılacak ViewModel
     public class UpdateProductViewModel
     {
         [Required(ErrorMessage = "Kategori bilgisi girilmelidir.")]

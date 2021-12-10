@@ -7,6 +7,7 @@ namespace Icarus.API.Infrastructure
 {
     public class MappingProfile : Profile
     {
+        // Hangi DB classı ile hangi ViewModelin map'leneceğini ayarladığımız kısım
         public MappingProfile()
         {
             CreateMap<UserViewModel, User>();

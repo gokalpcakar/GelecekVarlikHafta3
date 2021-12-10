@@ -33,8 +33,10 @@ namespace Icarus.API
             var _mappingProfile = new MapperConfiguration(mp => { mp.AddProfile(new MappingProfile()); });
             IMapper mapper = _mappingProfile.CreateMapper();
 
+            // Mapper'ýn inject edildiði kýsým
             services.AddSingleton(mapper);
 
+            // User ve Product interface'lerinin alakalý class'lara inject edildiði kýsým
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IProductService, ProductService>();
 

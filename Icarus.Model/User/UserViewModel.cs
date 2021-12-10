@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Icarus.Model.User
 {
+    // Kullanıcıların giriş haricindeki işlemlerinde kullanacağı ViewModel
     public class UserViewModel
     {
         [Required(ErrorMessage = "Ad alanı zorunludur.")]

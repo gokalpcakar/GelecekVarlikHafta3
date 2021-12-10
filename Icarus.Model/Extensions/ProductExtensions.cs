@@ -9,15 +9,15 @@ namespace Icarus.Model.Extensions
     public static class ProductExtensions
     {
         // Londra saat dilimine dönüştüren fonksiyon.
-        public static DateTime toLondonTimeZone(this DateTime trSaati)
+        public static DateTime toLondonTimeZone(this DateTime trTimeZone)
         {
-            return trSaati.AddHours(-3);
+            return trTimeZone.AddHours(-3);
         }
 
         // Tokyo saat dilimine dönüştüren fonksiyon.
-        public static DateTime toTokyoTimeZone(this DateTime trSaati)
+        public static DateTime toTokyoTimeZone(this DateTime trTimeZone)
         {
-            return trSaati.AddHours(6);
+            return trTimeZone.AddHours(6);
         }
     }
 }

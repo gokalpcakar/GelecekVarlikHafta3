@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Icarus.Model.User
 {
+    // Kullanıcıların giriş işleminde kullanılacak ViewModel
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Kullanıcı adı boş bırakılamaz.")]

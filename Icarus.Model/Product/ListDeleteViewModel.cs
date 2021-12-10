@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Icarus.Model.Product
 {
+    // Ürünlerin silme ve listelemesinde kullanılacak ViewModel
     public class ListDeleteViewModel
     {
         [Required(ErrorMessage = "Ürün adı boş bırakılamaz.")]

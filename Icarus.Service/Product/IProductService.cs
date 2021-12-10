@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Icarus.Service.Product
 {
+    // ProductService class'ında kullanılacak metotları burada tanımladık
     public interface IProductService
     {
         public General<ListDeleteViewModel> GetProducts();

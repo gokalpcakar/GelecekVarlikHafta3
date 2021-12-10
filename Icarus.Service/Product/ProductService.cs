@@ -18,16 +18,20 @@ namespace Icarus.Service.Product
         {
             mapper = _mapper;
         }
+
+        // Ürün listelemesini gerçekleştiren metot
         public General<ListDeleteViewModel> GetProducts()
         {
             var result = new General<ListDeleteViewModel>();
 
             using (var context = new IcarusContext())
             {
+                // eğer ürün aktif ve silinmemişse Id'sine göre listeliyoruz
                 var data = context.Product.
                             Where(x => x.IsActive && !x.IsDeleted).
                             OrderBy(x => x.Id);
 
+                // gelen veri varsa işlem başarılı yoksa belirttiğimiz mesaj dönüyor
                 if (data.Any())
                 {
                     result.List = mapper.Map<List<ListDeleteViewModel>>(data);
@@ -41,6 +45,8 @@ namespace Icarus.Service.Product
 
             return result;
         }
+
+        // Ürün ekleme işlemini gerçekleştiren metot
         public General<ProductViewModel> Insert(ProductViewModel newProduct)
         {
             var result = new General<ProductViewModel>();
@@ -48,10 +54,14 @@ namespace Icarus.Service.Product
 
             using (var context = new IcarusContext())
             {
+                // Eğer gelen modeldeki id veritabanındaki kullanıcılardan birinin id'si ise,
+                // kullanıcı login işlemini gerçekleştirmiş ve IsDeleted değeri false ise
+                // ekleme işlemini gerçekleştirebilecek yetkisi oluyor
                 var isAuth = context.User.Any(x => x.Id == model.Iuser &&
                                                            x.IsActive &&
                                                            !x.IsDeleted);
 
+                // Kullanıcı yetkiliyse ekleme gerçekleşiyor değilse aşağıdaki mesajı dönüyor
                 if (isAuth)
                 {
                     model.Idate = DateTime.Now;
@@ -69,31 +79,36 @@ namespace Icarus.Service.Product
 
             return result;
         }
+        // Ürün güncelleme işlemini gerçekleştiren metot
         public General<UpdateProductViewModel> Update(int id, UpdateProductViewModel product)
         {
             var result = new General<UpdateProductViewModel>();
 
             using (var context = new IcarusContext())
             {
+                // Güncelleme işlemini gerçekleştiren kişi
+                // daha önceden ürünü eklemiş kullanıcıysa yetkili konuma geliyor
                 var isAuth = context.Product.Any(x => x.Iuser == product.Iuser);
                 var updateProduct = context.Product.SingleOrDefault(i => i.Id == id);
 
+                // Kullanıcı yetkiliyse ürün güncelleniyor değilse mesaj dönüyor
                 if (isAuth)
                 {
                     if (updateProduct is not null)
                     {
-                        var trSaati = DateTime.Now;
+                        // güncelleme işleminin vaktini alıyoruz
+                        var trTimeZone = DateTime.Now;
 
                         updateProduct.Name = product.Name;
                         updateProduct.DisplayName = product.DisplayName;
                         updateProduct.Description = product.Description;
                         updateProduct.Price = product.Price;
                         updateProduct.Stock = product.Stock;
-                        updateProduct.Udate = DateTime.Now;
+                        updateProduct.Udate = trTimeZone;
 
                         // Güncellemeler tokyo ve londra saatine göre ne zaman yapılmış onu ekliyoruz
-                        updateProduct.UlondonDate = ProductExtensions.toLondonTimeZone(trSaati);
-                        updateProduct.UtokyoDate = ProductExtensions.toTokyoTimeZone(trSaati);
+                        updateProduct.UlondonDate = ProductExtensions.toLondonTimeZone(trTimeZone);
+                        updateProduct.UtokyoDate = ProductExtensions.toTokyoTimeZone(trTimeZone);
 
                         context.SaveChanges();
 
@@ -113,12 +128,15 @@ namespace Icarus.Service.Product
 
             return result;
         }
+        // Ürün silme işleminin gerçekleştiği metot
         public General<ListDeleteViewModel> Delete(int id)
         {
             var result = new General<ListDeleteViewModel>();
 
             using (var context = new IcarusContext())
             {
+                // Silme işlemi gerçekleştirilecek id'ye ait ürün var mı kontrol ediliyor
+                // Varsa ürün siliniyor yoksa mesaj dönüyor
                 var product = context.Product.SingleOrDefault(i => i.Id == id);
 
                 if (product is not null)

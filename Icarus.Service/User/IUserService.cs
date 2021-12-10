@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Icarus.Service.User
 {
+    // UserService class'ında kullanılacak metotları burada tanımladık
     public interface IUserService
     {
         public General<LoginViewModel> Login(LoginViewModel user);
