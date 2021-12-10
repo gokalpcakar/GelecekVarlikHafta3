@@ -47,7 +47,9 @@ namespace Icarus.Service.Product
 
             using (var context = new IcarusContext())
             {
-                var isAuth = context.Product.Any(x => x.Iuser == model.Iuser);
+                var isAuth = context.User.Any(x => x.Id == model.Iuser && 
+                                                           x.IsActive && 
+                                                           !x.IsDeleted);
 
                 if (isAuth)
                 {
