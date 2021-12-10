@@ -9,8 +9,6 @@ namespace Icarus.Model.User
 {
     public class UserViewModel
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "Ad alanı zorunludur.")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Ad 3 iler 50 karakter arasında olmalıdır.")]
         public string Name { get; set; }
