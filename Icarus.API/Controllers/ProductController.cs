@@ -17,7 +17,7 @@ namespace Icarus.API.Controllers
         }
 
         [HttpGet]
-        public General<ProductViewModel> GetProducts()
+        public General<ListDeleteViewModel> GetProducts()
         {
             return productService.GetProducts();
         }
@@ -29,13 +29,13 @@ namespace Icarus.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public General<UpdateDeleteViewModel> Update(int id, [FromBody] UpdateDeleteViewModel product)
+        public General<ProductViewModel> Update(int id, [FromBody] ProductViewModel product)
         {
             return productService.Update(id, product);
         }
 
         [HttpDelete("{id}")]
-        public General<UpdateDeleteViewModel> Delete(int id)
+        public General<ListDeleteViewModel> Delete(int id)
         {
             return productService.Delete(id);
         }

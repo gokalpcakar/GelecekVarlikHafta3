@@ -17,9 +17,9 @@ namespace Icarus.Service.Product
         {
             mapper = _mapper;
         }
-        public General<ProductViewModel> GetProducts()
+        public General<ListDeleteViewModel> GetProducts()
         {
-            var result = new General<ProductViewModel>();
+            var result = new General<ListDeleteViewModel>();
 
             using(var context = new IcarusContext())
             {
@@ -29,7 +29,7 @@ namespace Icarus.Service.Product
 
                 if (data.Any())
                 {
-                    result.List = mapper.Map<List<ProductViewModel>>(data);
+                    result.List = mapper.Map<List<ListDeleteViewModel>>(data);
                     result.IsSuccess = true;
                 }
                 else
@@ -68,9 +68,9 @@ namespace Icarus.Service.Product
 
             return result;
         }
-        public General<UpdateDeleteViewModel> Update(int id, UpdateDeleteViewModel product)
+        public General<ProductViewModel> Update(int id, ProductViewModel product)
         {
-            var result = new General<UpdateDeleteViewModel>();
+            var result = new General<ProductViewModel>();
 
             using (var context = new IcarusContext())
             {
@@ -79,7 +79,6 @@ namespace Icarus.Service.Product
 
                 if (isAuth)
                 {
-
                     if (updateProduct is not null)
                     {
                         updateProduct.Name = product.Name;
@@ -87,10 +86,11 @@ namespace Icarus.Service.Product
                         updateProduct.Description = product.Description;
                         updateProduct.Price = product.Price;
                         updateProduct.Stock = product.Stock;
+                        updateProduct.Udate = DateTime.Now;
 
                         context.SaveChanges();
 
-                        result.Entity = mapper.Map<UpdateDeleteViewModel>(updateProduct);
+                        result.Entity = mapper.Map<ProductViewModel>(updateProduct);
                         result.IsSuccess = true;
                     }
                     else
@@ -106,9 +106,9 @@ namespace Icarus.Service.Product
 
             return result;
         }
-        public General<UpdateDeleteViewModel> Delete(int id)
+        public General<ListDeleteViewModel> Delete(int id)
         {
-            var result = new General<UpdateDeleteViewModel>();
+            var result = new General<ListDeleteViewModel>();
 
             using (var context = new IcarusContext())
             {
@@ -119,12 +119,12 @@ namespace Icarus.Service.Product
                     context.Product.Remove(product);
                     context.SaveChanges();
 
-                    result.Entity = mapper.Map<UpdateDeleteViewModel>(product);
+                    result.Entity = mapper.Map<ListDeleteViewModel>(product);
                     result.IsSuccess = true;
                 }
                 else
                 {
-                    result.ExceptionMessage = "Kullanıcı bulunamadı.";
+                    result.ExceptionMessage = "Ürün bulunamadı.";
                 }
             }
 

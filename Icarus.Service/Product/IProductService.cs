@@ -10,9 +10,9 @@ namespace Icarus.Service.Product
 {
     public interface IProductService
     {
-        public General<ProductViewModel> GetProducts();
+        public General<ListDeleteViewModel> GetProducts();
         public General<ProductViewModel> Insert(ProductViewModel newProduct);
-        public General<UpdateDeleteViewModel> Update(int id, UpdateDeleteViewModel product);
-        public General<UpdateDeleteViewModel> Delete(int id);
+        public General<ProductViewModel> Update(int id, ProductViewModel product);
+        public General<ListDeleteViewModel> Delete(int id);
     }
 }
