@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Icarus.DB.Entities;
+using Icarus.Model.Product;
 using Icarus.Model.User;
 
 namespace Icarus.API.Infrastructure
@@ -13,6 +14,9 @@ namespace Icarus.API.Infrastructure
 
             CreateMap<User, LoginViewModel>();
             CreateMap<LoginViewModel, User>();
+
+            CreateMap<Product, ProductViewModel>();
+            CreateMap<ProductViewModel, Product>();
         }
     }
 }
