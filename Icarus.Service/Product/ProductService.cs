@@ -57,9 +57,9 @@ namespace Icarus.Service.Product
 
             return result;
         }
-        public General<ProductViewModel> Update(int id, ProductViewModel product)
+        public General<UpdateDeleteViewModel> Update(int id, UpdateDeleteViewModel product)
         {
-            var result = new General<ProductViewModel>();
+            var result = new General<UpdateDeleteViewModel>();
 
             using (var context = new IcarusContext())
             {
@@ -75,7 +75,7 @@ namespace Icarus.Service.Product
 
                     context.SaveChanges();
 
-                    result.Entity = mapper.Map<ProductViewModel>(updateProduct);
+                    result.Entity = mapper.Map<UpdateDeleteViewModel>(updateProduct);
                     result.IsSuccess = true;
                 }
                 else
@@ -86,9 +86,9 @@ namespace Icarus.Service.Product
 
             return result;
         }
-        public General<ProductViewModel> Delete(int id)
+        public General<UpdateDeleteViewModel> Delete(int id)
         {
-            var result = new General<ProductViewModel>();
+            var result = new General<UpdateDeleteViewModel>();
 
             using (var context = new IcarusContext())
             {
@@ -99,7 +99,7 @@ namespace Icarus.Service.Product
                     context.Product.Remove(product);
                     context.SaveChanges();
 
-                    result.Entity = mapper.Map<ProductViewModel>(product);
+                    result.Entity = mapper.Map<UpdateDeleteViewModel>(product);
                     result.IsSuccess = true;
                 }
                 else

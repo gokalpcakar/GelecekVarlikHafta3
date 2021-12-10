@@ -29,13 +29,13 @@ namespace Icarus.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public General<ProductViewModel> Update(int id, [FromBody] ProductViewModel product)
+        public General<UpdateDeleteViewModel> Update(int id, [FromBody] UpdateDeleteViewModel product)
         {
             return productService.Update(id, product);
         }
 
         [HttpDelete("{id}")]
-        public General<ProductViewModel> Delete(int id)
+        public General<UpdateDeleteViewModel> Delete(int id)
         {
             return productService.Delete(id);
         }
