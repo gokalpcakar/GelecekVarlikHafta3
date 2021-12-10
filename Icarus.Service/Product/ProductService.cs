@@ -45,7 +45,7 @@ namespace Icarus.Service.Product
             var result = new General<ProductViewModel>();
             var model = mapper.Map<Icarus.DB.Entities.Product>(newProduct);
 
-            using(var context = new IcarusContext())
+            using (var context = new IcarusContext())
             {
                 model.Idate = DateTime.Now;
                 context.Product.Add(model);
