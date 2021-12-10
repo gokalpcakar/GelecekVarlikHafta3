@@ -47,12 +47,21 @@ namespace Icarus.Service.Product
 
             using (var context = new IcarusContext())
             {
-                model.Idate = DateTime.Now;
-                context.Product.Add(model);
-                context.SaveChanges();
+                var isAuth = context.Product.Any(x => x.Iuser == model.Iuser);
 
-                result.Entity = mapper.Map<ProductViewModel>(model);
-                result.IsSuccess = true;
+                if (isAuth)
+                {
+                    model.Idate = DateTime.Now;
+                    context.Product.Add(model);
+                    context.SaveChanges();
+
+                    result.Entity = mapper.Map<ProductViewModel>(model);
+                    result.IsSuccess = true;
+                }
+                else
+                {
+                    result.ExceptionMessage = "Ürün ekleme yetkiniz bulunmamaktadır.";
+                }
             }
 
             return result;
@@ -63,24 +72,33 @@ namespace Icarus.Service.Product
 
             using (var context = new IcarusContext())
             {
+                var isAuth = context.Product.Any(x => x.Iuser == product.Iuser);
                 var updateProduct = context.Product.SingleOrDefault(i => i.Id == id);
 
-                if (updateProduct is not null)
+                if (isAuth)
                 {
-                    updateProduct.Name = product.Name;
-                    updateProduct.DisplayName = product.DisplayName;
-                    updateProduct.Description = product.Description;
-                    updateProduct.Price = product.Price;
-                    updateProduct.Stock = product.Stock;
 
-                    context.SaveChanges();
+                    if (updateProduct is not null)
+                    {
+                        updateProduct.Name = product.Name;
+                        updateProduct.DisplayName = product.DisplayName;
+                        updateProduct.Description = product.Description;
+                        updateProduct.Price = product.Price;
+                        updateProduct.Stock = product.Stock;
 
-                    result.Entity = mapper.Map<UpdateDeleteViewModel>(updateProduct);
-                    result.IsSuccess = true;
+                        context.SaveChanges();
+
+                        result.Entity = mapper.Map<UpdateDeleteViewModel>(updateProduct);
+                        result.IsSuccess = true;
+                    }
+                    else
+                    {
+                        result.ExceptionMessage = "Ürün bulunamadı.";
+                    }
                 }
                 else
                 {
-                    result.ExceptionMessage = "Ürün bulunamadı.";
+                    result.ExceptionMessage = "Güncelleme yetkiniz bulunmamaktadır.";
                 }
             }
 
