@@ -20,6 +20,9 @@ namespace Icarus.API.Infrastructure
 
             CreateMap<Product, ListDeleteViewModel>();
             CreateMap<ListDeleteViewModel, Product>();
+
+            CreateMap<Product, UpdateProductViewModel>();
+            CreateMap<UpdateProductViewModel, Product>();
         }
     }
 }

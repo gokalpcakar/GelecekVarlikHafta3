@@ -29,7 +29,7 @@ namespace Icarus.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public General<ProductViewModel> Update(int id, [FromBody] ProductViewModel product)
+        public General<UpdateProductViewModel> Update(int id, [FromBody] UpdateProductViewModel product)
         {
             return productService.Update(id, product);
         }

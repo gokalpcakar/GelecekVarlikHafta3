@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Icarus.DB.Entities.DataContext;
 using Icarus.Model;
+using Icarus.Model.Extensions;
 using Icarus.Model.Product;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace Icarus.Service.Product
         {
             var result = new General<ListDeleteViewModel>();
 
-            using(var context = new IcarusContext())
+            using (var context = new IcarusContext())
             {
                 var data = context.Product.
                             Where(x => x.IsActive && !x.IsDeleted).
@@ -47,8 +48,8 @@ namespace Icarus.Service.Product
 
             using (var context = new IcarusContext())
             {
-                var isAuth = context.User.Any(x => x.Id == model.Iuser && 
-                                                           x.IsActive && 
+                var isAuth = context.User.Any(x => x.Id == model.Iuser &&
+                                                           x.IsActive &&
                                                            !x.IsDeleted);
 
                 if (isAuth)
@@ -68,9 +69,9 @@ namespace Icarus.Service.Product
 
             return result;
         }
-        public General<ProductViewModel> Update(int id, ProductViewModel product)
+        public General<UpdateProductViewModel> Update(int id, UpdateProductViewModel product)
         {
-            var result = new General<ProductViewModel>();
+            var result = new General<UpdateProductViewModel>();
 
             using (var context = new IcarusContext())
             {
@@ -81,6 +82,8 @@ namespace Icarus.Service.Product
                 {
                     if (updateProduct is not null)
                     {
+                        var trSaati = DateTime.Now;
+
                         updateProduct.Name = product.Name;
                         updateProduct.DisplayName = product.DisplayName;
                         updateProduct.Description = product.Description;
@@ -88,9 +91,13 @@ namespace Icarus.Service.Product
                         updateProduct.Stock = product.Stock;
                         updateProduct.Udate = DateTime.Now;
 
+                        // Güncellemeler tokyo ve londra saatine göre ne zaman yapılmış onu ekliyoruz
+                        updateProduct.UlondonDate = ProductExtensions.toLondonTimeZone(trSaati);
+                        updateProduct.UtokyoDate = ProductExtensions.toTokyoTimeZone(trSaati);
+
                         context.SaveChanges();
 
-                        result.Entity = mapper.Map<ProductViewModel>(updateProduct);
+                        result.Entity = mapper.Map<UpdateProductViewModel>(updateProduct);
                         result.IsSuccess = true;
                     }
                     else

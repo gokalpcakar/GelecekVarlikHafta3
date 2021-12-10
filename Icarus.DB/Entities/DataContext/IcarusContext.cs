@@ -95,6 +95,14 @@ namespace Icarus.DB.Entities.DataContext
                     .HasColumnType("datetime")
                     .HasColumnName("UDate");
 
+                entity.Property(e => e.UlondonDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("ULondonDate");
+
+                entity.Property(e => e.UtokyoDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("UTokyoDate");
+
                 entity.Property(e => e.Uuser).HasColumnName("UUser");
 
                 entity.HasOne(d => d.Category)
