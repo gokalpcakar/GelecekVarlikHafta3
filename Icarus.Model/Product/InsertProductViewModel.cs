@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Icarus.Model.Product
 {
-    // Ürünlerin eklenmesinde kullanılacak ViewModel
-    public class ProductViewModel
+    public class InsertProductViewModel
     {
         [Required(ErrorMessage = "Kategori bilgisi girilmelidir.")]
         public int CategoryId { get; set; }

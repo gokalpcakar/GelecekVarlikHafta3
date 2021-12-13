@@ -12,7 +12,7 @@ namespace Icarus.Service.Product
     public interface IProductService
     {
         public General<ListDeleteViewModel> GetProducts();
-        public General<ProductViewModel> Insert(ProductViewModel newProduct);
+        public General<InsertProductViewModel> Insert(InsertProductViewModel newProduct);
         public General<UpdateProductViewModel> Update(int id, UpdateProductViewModel product);
         public General<ListDeleteViewModel> Delete(int id);
     }

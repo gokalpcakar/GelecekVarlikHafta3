@@ -16,8 +16,8 @@ namespace Icarus.API.Infrastructure
             CreateMap<User, LoginViewModel>();
             CreateMap<LoginViewModel, User>();
 
-            CreateMap<Product, ProductViewModel>();
-            CreateMap<ProductViewModel, Product>();
+            CreateMap<Product, InsertProductViewModel>();
+            CreateMap<InsertProductViewModel, Product>();
 
             CreateMap<Product, ListDeleteViewModel>();
             CreateMap<ListDeleteViewModel, Product>();

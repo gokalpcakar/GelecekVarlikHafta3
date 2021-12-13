@@ -26,7 +26,7 @@ namespace Icarus.API.Controllers
 
         // Ürün ekleme metodunun servis katmanından çağırıldığı kısım
         [HttpPost]
-        public General<ProductViewModel> Insert([FromBody] ProductViewModel newProduct)
+        public General<InsertProductViewModel> Insert([FromBody] InsertProductViewModel newProduct)
         {
             return productService.Insert(newProduct);
         }

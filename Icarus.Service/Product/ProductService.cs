@@ -47,9 +47,9 @@ namespace Icarus.Service.Product
         }
 
         // Ürün ekleme işlemini gerçekleştiren metot
-        public General<ProductViewModel> Insert(ProductViewModel newProduct)
+        public General<InsertProductViewModel> Insert(InsertProductViewModel newProduct)
         {
-            var result = new General<ProductViewModel>();
+            var result = new General<InsertProductViewModel>();
             var model = mapper.Map<Icarus.DB.Entities.Product>(newProduct);
 
             using (var context = new IcarusContext())
@@ -68,7 +68,7 @@ namespace Icarus.Service.Product
                     context.Product.Add(model);
                     context.SaveChanges();
 
-                    result.Entity = mapper.Map<ProductViewModel>(model);
+                    result.Entity = mapper.Map<InsertProductViewModel>(model);
                     result.IsSuccess = true;
                 }
                 else
